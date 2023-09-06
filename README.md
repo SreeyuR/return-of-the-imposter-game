@@ -37,3 +37,14 @@ This is a platform game where players navigate a character through a series of c
 
    ```bash
    git clone https://github.com/yourusername/platform-game.git
+
+## Credits
+This game was created by [Sreeyutha Ratala], [Misha Mints], [Sophia Stiles], and [Annika Viswesh].
+
+## License
+This project is licensed under the [License Name] - see the LICENSE.md file for details.
+
+## Feedback and Contributions
+If you have any questions, suggestions, or want to contribute to the project, please don't hesitate to reach out to the development team or to open an issue on GitHub.
+
+Enjoy the game, and remember, stay SUS!
