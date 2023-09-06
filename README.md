@@ -1,35 +1,23 @@
 # Return of the Imposter
-Platform game built using a custom-designed physics engine. The objective is to complete all levels using arrow keys, tongue feature, and jumping to sabotage the ship. Inspired by the popular video games among us and Mario bros.
+
+## Description
+Welcome to "Return of the Imposter," a thrilling platform game set in the Among Us universe. As an imposter on a spaceship, your mission is to navigate through various levels, overcome obstacles, and outwit the crewmates who are determined to thwart your plans. Your ultimate goal is to reach the reactor and destroy the ship. But beware, the crewmates become increasingly vicious as you progress.
 
 ![Game Title Screen](game_screenshots/game_title_screen.png)
 
-## Description
-
-This is a platform game where players navigate a character through a series of challenging levels, overcoming obstacles, collecting items, and reaching the end goal. The game offers a thrilling and engaging experience for players of all ages.
-
 ## Features
-
-- **Multiple Levels:** Enjoy a variety of levels with increasing difficulty.
-- **Character Selection:** Choose from a range of characters, each with unique abilities.
-- **Power-Ups:** Collect power-ups to enhance your character's abilities and score.
-- **Obstacles:** Navigate through challenging obstacles such as spikes, enemies, and moving platforms.
-- **Leaderboards:** Compete with friends and players worldwide to achieve the highest scores.
-- **Customization:** Personalize your character and gameplay settings.
+- **Multiple Levels:** Explore diverse settings, with each level increasing in difficulty.
+- **Survival:** Reach the vent at the end of each level to advance.
+- **Health Points:** Manage your imposter's health. Collisions with obstacles or crewmates will reduce your health. If it depletes entirely, you must restart the level.
+- **Power-Ups:** Use the tongue mechanism to shoot at crewmates and get rid of them. Trampolines disguised as black holes can give you momentum in the right direction!
+- **Create Levels:** Easily design your own levels using our platform, which is first read using Python, and then translated into C-code.
 
 ## How to Play
 
 1. **Controls:**
-   - Use the arrow keys or WASD for movement.
-   - Jump with the spacebar or 'J' key.
-   - Attack or use abilities with the 'K' key.
-   
-2. **Objective:**
-   - Reach the end of each level while collecting items and defeating enemies.
-   - Avoid falling into pits or touching hazards.
-
-3. **Scoring:**
-   - Earn points for collecting items, defeating enemies, and completing levels quickly.
-   - Check the leaderboard to see how you rank against other players.
+   - Use the mouse to navigate the user interface (main menu and level selection).
+   - Move with WASD keys.
+   - Control the imposter's tongue direction by clicking anywhere on the screen.
 
 ## Installation
 
