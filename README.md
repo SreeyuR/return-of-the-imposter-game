@@ -30,7 +30,8 @@ Welcome to "Return of the Imposter," a thrilling platform game set in the [Among
    git clone [https://github.com/SreeyuR/return-of-the-imposter-game.git](https://github.com/SreeyuR/return-of-the-imposter-game.git)
 
 2. Run in the terminal:
-   ```python3 rungame.py
+   ```bash
+   python3 rungame.py
    
 ## Credits
 
