@@ -1,16 +1,19 @@
 # Return of the Imposter
 
 ## Description
+
 Welcome to "Return of the Imposter," a thrilling platform game set in the Among Us universe. As an imposter on a spaceship, your mission is to navigate through various levels, overcome obstacles, and outwit the crewmates who are determined to thwart your plans. Your ultimate goal is to reach the reactor and destroy the ship. But beware, the crewmates become increasingly vicious as you progress.
 
 ![Game Title Screen](game_screenshots/game_title_screen.png)
 
 ## Features
+
 - **Multiple Levels:** Explore diverse settings, with each level increasing in difficulty.
 - **Survival:** Reach the vent at the end of each level to advance.
-- **Health Points:** Manage your imposter's health. Collisions with obstacles or crewmates will reduce your health. If it depletes entirely, you must restart the level.
+- **Health Points:** Manage your imposter's health. Collisions with obstacles or crewmates will reduce your health. Additionally, crewmates will attack you if you're in their line-of-site. If your health depletes entirely, you must restart the level.
 - **Power-Ups:** Use the tongue mechanism to shoot at crewmates and get rid of them. Trampolines disguised as black holes can give you momentum in the right direction!
 - **Create Levels:** Easily design your own levels using our platform, which is first read using Python, and then translated into C-code.
+- **Physics Engine:** Game is built upon a custom-designed physics engine. The imposter's tongue can attach to walls and eliminate enemies, acting as a spring force. Gravity is a constant force within the ship. Collision handling is implemented between all game objects. Realistic physics applies to character movement, with impulses and friction forces.
 
 ## How to Play
 
@@ -18,18 +21,20 @@ Welcome to "Return of the Imposter," a thrilling platform game set in the Among 
    - Use the mouse to navigate the user interface (main menu and level selection).
    - Move with WASD keys.
    - Control the imposter's tongue direction by clicking anywhere on the screen.
+   - P to pause and go to the main menu.
 
 ## Installation
 
 1. Clone the repository:
-
    ```bash
    git clone https://github.com/yourusername/platform-game.git
 
 ## Credits
+
 This game was created by [Sreeyutha Ratala], [Misha Mints], [Sophia Stiles], and [Annika Viswesh].
 
 ## License
+
 This project is licensed under the [License Name] - see the LICENSE.md file for details.
 
 ## Feedback and Contributions
