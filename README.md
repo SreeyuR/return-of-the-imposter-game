@@ -8,11 +8,11 @@ Welcome to "Return of the Imposter," a thrilling platform game set in the [Among
 
 ## Features
 
-- **Multiple Levels:** Explore diverse settings, with each level increasing in difficulty.
+- **Multiple Levels:** Explore diverse environments, with each level increasing in difficulty.
 - **Survival:** Reach the vent at the end of each level to advance.
-- **Health Points:** Manage your imposter's health. Collisions with obstacles or crewmates will reduce your health. Additionally, crewmates will attack you if you're in their line-of-site. If your health depletes entirely, you must restart the level.
-- **Power-Ups:** Use the tongue mechanism to shoot at crewmates and get rid of them. Trampolines disguised as black holes can give you momentum in the right direction!
-- **Create Levels:** Easily design your own levels using our platform, which is first read using Python, and then translated into C-code.
+- **Health Points:** Manage your imposter's health. Collisions with obstacles or crewmates will reduce your health. Additionally, crewmates will attack you if you're in their line of sight. If your health depletes entirely, you must restart the level.
+- **Power-Ups:** Use the tongue mechanism to shoot at crewmates and get rid of them. Trampolines disguised as black holes can give you momentum in the right direction.
+- **Create Levels:** Easily design your own levels using our platform, which is first interpreted using Python, and then translated into C-code.
 - **Physics Engine:** Game is built upon a custom-designed physics engine. The imposter's tongue can attach to walls and eliminate enemies, acting as a spring force. Gravity is a constant force within the ship. Collision handling is implemented between all game objects. Realistic physics applies to character movement, with impulses and friction forces.
 
 ## How to Play
