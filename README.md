@@ -27,7 +27,7 @@ Welcome to "Return of the Imposter," a thrilling platform game set in the [Among
 
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/SreeyuR/return-of-the-imposter-game.git](https://github.com/SreeyuR/return-of-the-imposter-game.git)
+   git clone https://github.com/SreeyuR/return-of-the-imposter-game.git
 
 2. Run in the terminal:
    ```bash
