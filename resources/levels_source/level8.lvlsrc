@@ -1,0 +1,26 @@
+# Wall thickness
+let WT 20
+
+frame 0 0 1000 800
+
+    body BACKGROUND_DEFAULTS pos={-- 0 0} shape={rect @FW @FH} texture=SPRITES_DIR+"space.png"
+
+        frame 0 0 @FW+@FW/4 @FH
+
+        call begin_room WT      0 0 NO_DOOR     0 0 NO_DOOR     0 0 NO_DOOR     0 0 NO_DOOR
+
+            # One room with elevator
+            frame @FW/3 0 @FW-100 @FH-100
+
+                # Place elevator
+                call place_elevator_with_texture WT 20 "'balloon_elevator.png'"
+
+            
+            endframe
+        endframe
+    endframe
+endframe
+
+
+
+

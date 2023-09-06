@@ -1,0 +1,316 @@
+let WINDOW_WIDTH 1000
+let WINDOW_HEIGHT 500
+
+let PLAYER_WIDTH 30
+let PLAYER_HEIGHT 30
+
+let CREWMATE_WIDTH 30
+let CREWMATE_HEIGHT 30
+
+let CREWMATE_LEVEL2_WIDTH 45
+let CREWMATE_LEVEL2_HEIGHT 45
+
+let CREWMATE_LEVEL3_WIDTH 60
+let CREWMATE_LEVEL3_HEIGHT 60
+
+let CREWMATE_LEVEL4_WIDTH 69
+let CREWMATE_LEVEL4_HEIGHT 69
+
+let KEY_WIDTH 20
+let KEY_HEIGHT 20
+
+let DOOR_WIDTH 10
+let DOOR_HEIGHT 45
+
+let SPIKE_HEIGHT 20
+
+let SPIKEY_CIRCLE_NUM_ARMS 8
+let SPIKEY_CIRCLE_CIRCUMRADIUS 20
+let SPIKEY_CIRCLE_INRADIUS 10
+
+let VENT_WIDTH 50
+let VENT_HEIGHT 15
+
+let TRAMPOLINE_WIDTH 90
+let TRAMPOLINE_HEIGHT 40
+
+let STRETCH_TO_FIT 0
+let PRESERVE_ASPECT_RATIO_AND_EXPAND 1
+let PRESERVE_SCALE_AND_TILE 2
+
+let SPRITES_DIR "'resources/sprites/'"
+
+let PLAYER_DEFAULTS "role=player shape={rect PLAYER_WIDTH PLAYER_HEIGHT} texture=SPRITES_DIR+'imposter_extra_sus.png' mass=10 health=10 tongue_damage=1 invincibility_time=0.5"
+
+let CREWMATE_DEFAULTS "role=crewmate shape={rect CREWMATE_WIDTH CREWMATE_HEIGHT} texture=SPRITES_DIR+'green_amongus.png' mass=10 health=2 reload_time=1 trajectory_speed=30 damage_per_bullet=1 invincibility_time=0.5"
+
+let CREWMATE_LEVEL2_DEFAULTS "role=crewmate shape={rect CREWMATE_LEVEL2_WIDTH CREWMATE_LEVEL2_HEIGHT} texture=SPRITES_DIR+'yellow_amongus.png' mass=15 health=5 reload_time=0.7 trajectory_speed=30 damage_per_bullet=1 invincibility_time=0.5"
+
+let CREWMATE_LEVEL3_DEFAULTS "role=crewmate shape={rect CREWMATE_LEVEL3_WIDTH CREWMATE_LEVEL3_HEIGHT} texture=SPRITES_DIR+'cyan_amongus.png' mass=20 health=8 reload_time=0.7 trajectory_speed=20 damage_per_bullet=2 invincibility_time=0.5"
+
+let CREWMATE_LEVEL4_DEFAULTS "role=crewmate shape={rect CREWMATE_LEVEL4_WIDTH CREWMATE_LEVEL4_HEIGHT} texture=SPRITES_DIR+'purple_amongus.png' mass=25 health=11 reload_time=0.7 trajectory_speed=20 damage_per_bullet=3 invincibility_time=0.5"
+
+let KEY_DEFAULTS "role=key shape={rect KEY_WIDTH KEY_HEIGHT}"
+
+let DOOR_DEFAULTS "role=door shape={rect DOOR_WIDTH DOOR_HEIGHT}"
+
+let WALL_DEFAULTS "role=wall texture=SPRITES_DIR+'concrete_texture.jpg' texture_render_option=PRESERVE_SCALE_AND_TILE"
+
+let VENT_DEFAULTS "role=vent texture=SPRITES_DIR+'vent.png' shape={rect VENT_WIDTH VENT_HEIGHT}"
+
+let SPIKE_DEFAULTS "role=damaging_obstacle texture=SPRITES_DIR+'spikes.png' texture_render_option=PRESERVE_SCALE_AND_TILE damage=1"
+
+let SPIKEY_CIRCLE_DEFAULTS "role=damaging_obstacle damage=1 trajectory_speed=50 texture=SPRITES_DIR+'spikey_circle.png' shape={star SPIKEY_CIRCLE_NUM_ARMS SPIKEY_CIRCLE_CIRCUMRADIUS SPIKEY_CIRCLE_INRADIUS}"
+
+let STOMPER_DEFAULTS "role=damaging_obstacle mass=20 texture=SPRITES_DIR+'red_metal_texture.jpg' texture_render_option=PRESERVE_SCALE_AND_TILE damage=1"
+
+let MOVING_PLATFORM_DEFAULTS "role=damaging_obstacle mass=20 texture=SPRITES_DIR+'concrete_texture.jpg' texture_render_option=PRESERVE_SCALE_AND_TILE damage=0"
+
+let TRAMPOLINE_DEFAULTS "role=trampoline texture=SPRITES_DIR+'black_hole_trampoline.png' bounciness=5 shape={rect TRAMPOLINE_WIDTH TRAMPOLINE_HEIGHT}"
+
+let BACKGROUND_DEFAULTS "role=decoration texture_render_option=PRESERVE_SCALE_AND_TILE"
+
+# A function that does nothing (useful for passing in as callback)
+func do_nothing
+endfunc
+
+func frameboundary_ext thickness
+    body WALL_DEFAULTS pos={+= 0 @FH/2} shape={rect thickness @FH+thickness*2}
+    body WALL_DEFAULTS pos={-= @FW @FH/2} shape={rect thickness @FH+thickness*2}
+    body WALL_DEFAULTS pos={=+ @FW/2 0} shape={rect @FW+thickness*2 thickness}
+    body WALL_DEFAULTS pos={=- @FW/2 @FH} shape={rect @FW+thickness*2 thickness}
+endfunc
+
+func ladder step_len spacing thickness cur_on_left
+    call ladder_with_callback step_len spacing thickness cur_on_left do_nothing
+endfunc
+
+# Ladder that calls a callback function on each of its steps
+func ladder_with_callback step_len spacing thickness cur_on_left callback
+    if @FH >= spacing + thickness
+        if cur_on_left
+            body WALL_DEFAULTS pos={-- 0 spacing} shape={rect step_len thickness}
+            frame 0 spacing+thickness step_len 2*spacing+thickness
+                call callback
+            endframe
+        endif
+        if not cur_on_left
+            body WALL_DEFAULTS pos={+- @FW spacing} shape={rect step_len thickness}
+            frame @FW-step_len spacing+thickness @FW 2*spacing+thickness
+                call callback
+            endframe
+        endif
+        frame 0 spacing+thickness @FW @FH
+            call ladder_with_callback step_len spacing thickness not(cur_on_left) callback
+        endframe
+    endif
+endfunc
+
+func ladder_lr step_len spacing thickness
+    call ladder step_len spacing thickness 1
+endfunc
+
+func ladder_rl step_len spacing thickness
+    call ladder step_len spacing thickness 0
+endfunc
+
+func place_vent
+    body VENT_DEFAULTS pos={-- 0 0} shape={rect @FW VENT_HEIGHT}
+endfunc
+
+func place_spikes
+    body SPIKE_DEFAULTS pos={-- 0 0} shape={rect @FW SPIKE_HEIGHT}
+endfunc
+
+func place_top_spikes
+    body SPIKE_DEFAULTS pos={-+ 0 @FH} shape={rect @FW SPIKE_HEIGHT} texture=SPRITES_DIR+"spikes_upside_down.png"
+endfunc
+
+func place_key id_num
+    body KEY_DEFAULTS pos={=+ 0 0} id=id_num
+endfunc
+
+func place_trampoline
+    body TRAMPOLINE_DEFAULTS pos={=- @FW/2 0}
+    # Add left and right walls to prevent player from experiencing trampoline 
+    # effect from the sides.
+    body WALL_DEFAULTS pos={+- @FW/2-TRAMPOLINE_WIDTH/2 0} shape={rect 5 TRAMPOLINE_HEIGHT/2} texture=SPRITES_DIR+"transparent.png"
+    body WALL_DEFAULTS pos={-- @FW/2+TRAMPOLINE_WIDTH/2 0} shape={rect 5 TRAMPOLINE_HEIGHT/2} texture=SPRITES_DIR+"transparent.png"
+endfunc
+
+func place_alternating_spikes width gap
+    if @FW < width
+        call place_spikes
+    else
+        frame 0 0 width @FH
+            call place_spikes
+        endframe
+        if @FW > width + gap
+            frame width+gap 0 @FW @FH
+                call place_alternating_spikes width gap
+            endframe
+        endif
+    endif
+endfunc
+
+func place_alternating_keys width gap
+    if @FW < width
+        call place_key 0
+    else
+        frame 0 0 width @FH
+            call place_key
+        endframe
+        if @FW > width + gap
+            frame width+gap 0 @FW @FH
+                call place_alternating_key width gap
+            endframe
+        endif
+    endif
+endfunc
+
+func place_moving_crewmate level
+    if level == 1
+        body CREWMATE_DEFAULTS pos={=- @FW/2 0} trajectory_pos={== @FW/2 CREWMATE_HEIGHT/2} trajectory_shape={rect @FW-CREWMATE_WIDTH 0.001}
+    endif
+    if level == 2
+        body CREWMATE_LEVEL2_DEFAULTS pos={=- @FW/2 0} trajectory_pos={== @FW/2 CREWMATE_LEVEL2_HEIGHT/2} trajectory_shape={rect @FW-CREWMATE_LEVEL2_WIDTH 0.001}
+    endif
+    if level == 3
+        body CREWMATE_LEVEL3_DEFAULTS pos={=- @FW/2 0} trajectory_pos={== @FW/2 CREWMATE_LEVEL3_HEIGHT/2} trajectory_shape={rect @FW-CREWMATE_LEVEL3_WIDTH 0.001}
+    endif
+    if level == 4
+        body CREWMATE_LEVEL4_DEFAULTS pos={=- @FW/2 0} trajectory_pos={== @FW/2 CREWMATE_LEVEL4_HEIGHT/2} trajectory_shape={rect @FW-CREWMATE_LEVEL4_WIDTH 0.001}
+    endif
+endfunc
+
+func place_moving_spike_in_star_shape
+    body SPIKEY_CIRCLE_DEFAULTS pos={== @FW/2 @FH/2} trajectory_shape={star 5 min(@FW,@FH) min(@FW,@FH)/2}
+endfunc
+
+func place_elevator thickness speed
+    body MOVING_PLATFORM_DEFAULTS pos={-- 0 0} shape={rect @FW thickness} trajectory_pos={=- @FW/2 thickness/2} trajectory_shape={rect 0.001 @FH-thickness} trajectory_speed=speed
+endfunc
+
+func place_elevator_with_texture thickness speed texture
+    body MOVING_PLATFORM_DEFAULTS texture=SPRITES_DIR+texture pos={-- 0 0} shape={rect @FW thickness} trajectory_pos={=- @FW/2 thickness/2} trajectory_shape={rect 0.001 @FH-thickness} trajectory_speed=speed
+endfunc
+
+func place_ferry width speed
+    body MOVING_PLATFORM_DEFAULTS pos={-- 0 0} shape={rect width @FH} trajectory_pos={-= width/2 @FH/2} trajectory_shape={rect @FW-width 0.001} trajectory_speed=speed
+endfunc
+
+# Places obstacles, each width by height, spacing apart, that move on vertical trajectories
+# such that each is opposite of the adjacent one. cur_on_ground (bool) specifies if the first one
+# that is placed starts on the ground
+func place_alternating_stomping_obstacles width height spacing speed cur_on_ground
+    if @FW >= width + spacing
+        let trajectory "trajectory_pos={=- width/2 height/2} trajectory_shape={rect 0.001 @FH-height} trajectory_speed=speed"
+        if cur_on_ground
+            body STOMPER_DEFAULTS pos={-- 0 0} shape={rect width height} trajectory
+        endif
+        if not cur_on_ground
+            body STOMPER_DEFAULTS pos={-+ 0 @FH} shape={rect width height} trajectory
+        endif
+        frame width+spacing 0 @FW @FH
+            call place_alternating_stomping_obstacles width height spacing speed not(cur_on_ground)
+        endframe
+    endif
+endfunc
+
+let NO_DOOR -1
+let NO_WALL -2
+
+# This function creates a frame and does not end it. If you call this function,
+# you can put contentes inside the room created by it, but you must follow it by
+# endframe. Parameters are wall thickness of the exterior walls and the position,
+# size, and id of 4 doors on each side. If NO_DOOR is passed for a door id, no door
+# body is created. If NO_WALL is passed for a door id, no door or wall is created.
+# If the door size is negative, then the door is positined from the right/top.
+
+func begin_room wall_thickness left_door_y left_door_size left_door_id right_door_y right_door_size right_door_id bottom_door_x bottom_door_size bottom_door_id top_door_x top_door_size top_door_id
+    # Bounds for inner room frame
+    let min_x wall_thickness
+    let min_y wall_thickness
+    let max_x @FW-wall_thickness
+    let max_y @FH-wall_thickness
+    
+    if left_door_id == NO_WALL
+        let min_x 0
+    endif
+    if right_door_id == NO_WALL
+        let max_x @FW
+    endif
+    if bottom_door_id == NO_WALL
+        let min_y 0
+    endif
+    if top_door_id == NO_WALL
+        let max_y @FH
+    endif
+
+    # Adjust door coordinates. Negative door size means positioning from
+    # the opposite side. If that is the case, flip the sign after handling.
+    if left_door_size > 0
+        let left_door_y left_door_y + min_y
+    else
+        let left_door_size -left_door_size
+        let left_door_y max_y - left_door_y - left_door_size
+    endif
+    if right_door_size > 0
+        let right_door_y right_door_y + min_y
+    else
+        let right_door_size -right_door_size
+        let right_door_y max_y - right_door_y - right_door_size
+    endif
+    if bottom_door_size > 0
+        let bottom_door_x bottom_door_x + min_x
+    else
+        let bottom_door_size -bottom_door_size
+        let bottom_door_x max_x - bottom_door_x - bottom_door_size
+    endif
+    if top_door_size > 0
+        let top_door_x top_door_x + min_x
+    else
+        let top_door_size -top_door_size
+        let top_door_x max_x - top_door_x - top_door_size
+    endif
+
+    # Left wall
+    if left_door_id != NO_WALL
+        body WALL_DEFAULTS pos={-- 0 0} shape={rect wall_thickness left_door_y}
+        if left_door_id != NO_DOOR and left_door_size > 0
+            body DOOR_DEFAULTS pos={-- 0 left_door_y} shape={rect wall_thickness left_door_size} id=left_door_id
+        endif
+        body WALL_DEFAULTS pos={-- 0 left_door_y+left_door_size} shape={rect wall_thickness @FH-left_door_y-left_door_size}
+    endif
+
+    # Right wall
+    if right_door_id != NO_WALL
+        body WALL_DEFAULTS pos={+- @FW 0} shape={rect wall_thickness right_door_y}
+        if right_door_id != NO_DOOR and right_door_size > 0
+            body DOOR_DEFAULTS pos={+- @FW right_door_y} shape={rect wall_thickness right_door_size} id=right_door_id
+        endif
+        body WALL_DEFAULTS pos={+- @FW right_door_y+right_door_size} shape={rect wall_thickness @FH-right_door_y-right_door_size}
+    endif
+
+    # Bottom wall
+    if bottom_door_id != NO_WALL
+        body WALL_DEFAULTS pos={-- 0 0} shape={rect bottom_door_x wall_thickness}
+        if bottom_door_id != -1 and bottom_door_size > 0
+            body DOOR_DEFAULTS pos={-- bottom_door_x 0} shape={rect bottom_door_size wall_thickness} id=bottom_door_id
+        endif
+        body WALL_DEFAULTS pos={-- bottom_door_x+bottom_door_size 0} shape={rect @FW-bottom_door_x-bottom_door_size wall_thickness}
+    endif
+
+    # Top wall
+    if top_door_id != NO_WALL
+        body WALL_DEFAULTS pos={-+ 0 @FH} shape={rect top_door_x wall_thickness}
+        if top_door_id != -1 and top_door_size > 0
+            body DOOR_DEFAULTS pos={-+ top_door_x @FH} shape={rect top_door_size wall_thickness} id=top_door_id
+        endif
+        body WALL_DEFAULTS pos={-+ top_door_x+top_door_size @FH} shape={rect @FW-top_door_x-top_door_size wall_thickness}
+    endif
+
+    # Create room frame
+    frame min_x min_y max_x max_y
+        # Incomplete Frame! User content goes in this frame
+endfunc

@@ -1,0 +1,27 @@
+scene_boundary -100.000000 0.000000 1100.000000 500.000000
+body shape={rect,--,0.0,0.0,1000.0,500.0} role=decoration texture=resources/sprites/space_background_3.jpg
+body shape={rect,+=,0.0,250.0,300,1100.0} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,-=,1000.0,250.0,300,1100.0} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,=+,500.0,0.0,1600.0,300} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,=-,500.0,500.0,1600.0,300} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,500.0,0.0,30,30} role=player texture=resources/sprites/imposter_extra_sus.png mass=10 health=10 tongue_damage=1 invincibility_time=0.5
+body shape={rect,--,0.0,40.0,300.0,10} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,0.0,0.0,20,20} role=key id=4
+body shape={rect,--,0.0,90.0,300.0,10} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,0.0,50.0,20,20} role=key id=3
+body shape={rect,--,0.0,140.0,300.0,10} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,0.0,100.0,20,20} role=key id=2
+body shape={rect,--,0.0,190.0,300.0,10} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,0.0,150.0,20,20} role=key id=1
+body shape={rect,--,0.0,240.0,300.0,10} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,0.0,200.0,20,20} role=key id=0
+body shape={rect,--,700.0,45.0,300.0,10} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,700.0,0.0,10,45} role=door id=4
+body shape={rect,--,700.0,100.0,300.0,10} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,700.0,55.0,10,45} role=door id=3
+body shape={rect,--,700.0,155.0,300.0,10} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,700.0,110.0,10,45} role=door id=2
+body shape={rect,--,700.0,210.0,300.0,10} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,700.0,165.0,10,45} role=door id=1
+body shape={rect,--,700.0,265.0,300.0,10} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,700.0,220.0,10,45} role=door id=0

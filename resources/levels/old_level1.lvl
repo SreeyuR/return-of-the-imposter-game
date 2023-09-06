@@ -1,0 +1,23 @@
+scene_boundary 0.000000 0.000000 1000.000000 500.000000
+body shape={rect,--,0.0,0.0,1000.0,500.0} role=decoration texture=resources/sprites/space_background_3.jpg
+body shape={rect,+=,0.0,250.0,300,1100.0} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,-=,1000.0,250.0,300,1100.0} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,=+,500.0,0.0,1600.0,300} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,=-,500.0,500.0,1600.0,300} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,800.0,0.0,10,300.0} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,=-,800.0,300.0,100,10} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,+=,1000.0,200.0,100.0,10} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,810.0,0.0,190.0,20} role=damaging_obstacle texture=resources/sprites/spikes.png texture_render_option=2 damage=1
+body shape={rect,--,333.3333333333333,0.0,373.3333333333334,250.0} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,=-,520.0,250.0,30,30} trajectory_shape={rect,==,520.0,265.0,343.3333333333334,0.001} role=crewmate texture=resources/sprites/green_amongus.png mass=10 health=2 reload_time=1 trajectory_speed=30 damage_per_bullet=1 invincibility_time=0.5
+body shape={rect,--,706.6666666666667,40.0,31.111111111111086,10} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,+-,800.0,90.0,31.111111111111086,10} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,706.6666666666667,140.0,31.111111111111086,10} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,+-,800.0,190.0,31.111111111111086,10} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,706.6666666666667,240.0,31.111111111111086,10} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,706.6666666666667,0.0,93.33333333333326,15} role=vent texture=resources/sprites/vent.png
+body shape={rect,--,0.0,0.0,30,30} role=player texture=resources/sprites/imposter_extra_sus.png mass=10 health=10 tongue_damage=1 invincibility_time=0.5
+body shape={rect,--,0.0,50.0,111.1111111111111,10} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,+-,333.3333333333333,110.0,111.1111111111111,10} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,0.0,170.0,111.1111111111111,10} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,+-,333.3333333333333,230.0,111.1111111111111,10} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2

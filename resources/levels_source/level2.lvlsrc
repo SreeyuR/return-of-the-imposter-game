@@ -1,0 +1,54 @@
+# Wall thickness
+let WT 20
+
+scene_boundary "-INFINITY" 0 "INFINITY" 500
+
+frame 0 0 1500 500
+    frame -1000 -1000 @FW+1000 @FH+1000
+        body BACKGROUND_DEFAULTS pos={-- 0 0} shape={rect @FW @FH} texture=SPRITES_DIR+"space_background_2.jpg"
+    endframe
+    call begin_room WT      0 -50 0        0 0 NO_DOOR         0 0 NO_DOOR      0 0 NO_DOOR
+        body BACKGROUND_DEFAULTS pos={-- 0 0} shape={rect @FW @FH} texture=SPRITES_DIR+"futuristic_wall_darker.png"
+        body PLAYER_DEFAULTS pos={-- 0 0}
+        frame @FW/8 0 @FW/4 @FH/2
+            call ladder_lr @FW/4 40 WT
+            body KEY_DEFAULTS pos={+- @FW 0} id=0
+        endframe
+        frame 0 @FH/2 @FW/8 @FH
+            call ladder_rl @FW/4 60 WT
+        endframe
+        frame -300 @FH*3/4 0 @FH+WT
+            call begin_room WT          0 0 NO_DOOR         0 0 NO_WALL         0 0 NO_DOOR         0 0 NO_DOOR
+                body KEY_DEFAULTS pos={== @FW/2 @FH/2} id=1
+            endframe
+        endframe     
+        frame @FW/4 @FH/2 @FW @FH
+            call place_moving_crewmate 1
+            frame 0 0 @FW/2 @FH
+                call place_moving_crewmate 1
+            endframe
+            frame @FW/2 0 @FW @FH
+                call place_moving_crewmate 1
+            endframe
+        endframe
+        frame @FW/4 0 @FW/2 @FH/2
+            call begin_room WT      0 0 NO_DOOR         0 0 NO_WALL         0 0 NO_WALL         0 0 NO_DOOR
+                body VENT_DEFAULTS pos={-- 0 0}
+            endframe
+        endframe
+        frame @FW/2 0 3*@FW/4 @FH/2
+            call begin_room WT      0 DOOR_HEIGHT 0         0 0 NO_WALL         0 0 NO_WALL         0 0 NO_DOOR
+                call place_moving_crewmate 2
+                body KEY_DEFAULTS pos={+- @FW-10 @FH/2} id=0
+            endframe
+        endframe
+        frame 3*@FW/4 0 @FW @FH/2
+            call begin_room WT      0 DOOR_HEIGHT 2         0 0 NO_WALL         0 0 NO_WALL         0 DOOR_HEIGHT 1
+                frame @FW/2 0 @FW/2+50 @FH
+                    call place_spikes
+                endframe
+                body KEY_DEFAULTS pos={+- @FW 0} id=2
+            endframe
+        endframe
+    endframe
+endframe

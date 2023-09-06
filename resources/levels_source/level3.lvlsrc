@@ -1,0 +1,93 @@
+# Wall thickness
+let WT 20
+
+frame 0 0 2000 500
+    scene_boundary 0 0 @FW @FH
+    call begin_room WT      0 0 NO_DOOR        0 0 NO_DOOR         0 0 NO_DOOR      0 0 NO_DOOR
+        body BACKGROUND_DEFAULTS pos={-- 0 0} shape={rect @FW @FH} texture=SPRITES_DIR+"futuristic_wall_darker.png"
+        
+        # First long room, filled with spikes on the bottom. The player stands on a ledge,
+        # and a ferry goes and forth across the spikes. On the right, above the door, there
+        # is a ledge with a crewmate and a key that unlocks the door.
+        frame 0 0 @FW/2 @FH*3/4
+            call begin_room WT      0 0 NO_WALL     SPIKE_HEIGHT DOOR_HEIGHT*2 0     0 0 NO_WALL     0 0 NO_DOOR
+                call place_spikes
+                frame 0 SPIKE_HEIGHT @FW SPIKE_HEIGHT+WT
+                    let ledge 50
+                    body WALL_DEFAULTS pos={-- 0 0} shape={rect ledge WT}
+                    body PLAYER_DEFAULTS pos={-- 0 WT}
+                    frame ledge 0 @FW @FH
+                        call place_ferry 50 30
+                    endframe
+                endframe
+                frame 0 SPIKE_HEIGHT+WT @FW @FH
+                    frame @FW-50 @FH/2 @FW @FH
+                        body WALL_DEFAULTS pos={-- 0 0} shape={rect @FW WT}
+                        frame 0 WT @FW @FH
+                            call place_moving_crewmate 1
+                            body KEY_DEFAULTS pos={+= @FW @FH/2} id=0
+                        endframe
+                    endframe
+                endframe
+            endframe
+        endframe
+
+        # The second room, containing a level-2 crewmate and alternating stomping
+        # obstacles. Contains a key of id 2 used to access the third room, as well
+        # as a small inclusion which can only be accessed from above. This inclusion contains
+        # a key of id 1 (needed to unlock another room containing the key of id 0 used)
+        # to get to the final room, as well as a key of id 4 that can be used to unlock
+        # the door to get back to the second room
+        frame @FW/2 0 @FW*7/8 @FH/2
+            call begin_room WT      0 0 NO_WALL     0 DOOR_HEIGHT 2         0 0 NO_WALL     0 50 3
+                frame 0 0 @FW/2 @FH
+                    call place_moving_crewmate 2
+                endframe
+                frame @FW/2 0 @FW/2+80*3 @FH
+                    call place_alternating_stomping_obstacles 80 @FH/2 0 30 1
+                    body KEY_DEFAULTS pos={=- @FW/2 0} id=2
+                endframe
+                frame 0 @FH-100 150 @FH
+                    call begin_room WT      0 0 NO_WALL     0 50 4     0 0 NO_DOOR     0 0 NO_WALL
+                        body KEY_DEFAULTS pos={-- 0 0} id=1
+                        body KEY_DEFAULTS pos={=- @FW/2 0} id=4
+                    endframe
+                endframe
+            endframe
+        endframe
+
+        # The third room (although not an actual "room"). Contains an elevator
+        # and a key that can be used to access the small inclusion mentioned above
+        frame @FW*7/8 0 @FW @FH
+            frame @FW/2-30 0 @FW/2+30 @FH-PLAYER_HEIGHT
+                call place_elevator WT 30
+                body KEY_DEFAULTS pos={+- @FW 0} id=3
+            endframe
+        endframe
+
+        # The 4th room, located above the 2nd room. Contains alternating spikes.
+        # The inclusion in the 2nd room can be accessed from here. It itself contains
+        # another inclusion, which is unlocked by the key from the 2nd room's inclusion,
+        # and contains the key to unlock the final room.
+        frame @FW/2 @FH/2 @FW*7/8 @FH
+            frame 50 0 @FW-50 @FH
+                call place_alternating_spikes 100 50
+            endframe
+            frame @FW*3/4 @FH/2 @FW @FH
+                call begin_room WT       0 0 NO_DOOR     0 DOOR_HEIGHT 1     0 0 NO_DOOR     0 0 NO_WALL
+                    body KEY_DEFAULTS pos={-- 0 0} id=0
+                endframe     
+            endframe
+        endframe
+
+        # The final room, long and thin, located above the starting room.
+        # Contains the vent and alternating stomping obstacles.
+        frame 0 @FH*3/4 @FW/2 @FH
+            body DOOR_DEFAULTS pos={+- @FW 0} shape={rect WT @FH} id=0
+            body VENT_DEFAULTS pos={-- 0 0}
+            frame 200 0 @FW-200 @FH
+                call place_alternating_stomping_obstacles 80 @FH/4 60 10 1
+            endframe
+        endframe
+    endframe
+endframe

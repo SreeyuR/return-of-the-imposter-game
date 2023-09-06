@@ -1,0 +1,55 @@
+# Wall thickness
+let WT 20
+
+frame 0 0 2500 2500
+    frame -100 0 @FW+100 @FH
+        scene_boundary 0 0 @FW @FH
+        body BACKGROUND_DEFAULTS pos={-- 0 0} shape={rect @FW @FH} texture=SPRITES_DIR+"space_background_3.jpg"
+    endframe
+
+    frame 0 0 1000 @FH
+        frame 0 0 1000 500
+            body BACKGROUND_DEFAULTS pos={-- 0 0} shape={rect @FW @FH} texture=SPRITES_DIR+"futuristic_wall_darker.png"
+            call begin_room WT      0 0 NO_DOOR        0 0 NO_DOOR         0 0 NO_DOOR      @FW/2-WT-80/2 80 0
+                body PLAYER_DEFAULTS pos={-- 0 0}
+                func ladder_callback
+                    frame 100 0 @FW-100 @FH
+                        call place_alternating_spikes 50 100
+                    endframe
+                endfunc
+                call ladder_with_callback 800 100 WT 0 ladder_callback
+                body KEY_DEFAULTS pos={+- @FW 0} id=0
+                frame @FW/2 0 @FW @FH
+                    call place_moving_crewmate 2
+                endframe
+            endframe
+        endframe
+
+        frame @FW/2-100 500 @FW/2+100 1400
+            body BACKGROUND_DEFAULTS pos={-- 0 0} shape={rect @FW @FH} texture=SPRITES_DIR+"futuristic_wall_darker.png"
+            call begin_room WT      0 0 NO_DOOR     0 -80 1     0 0 NO_WALL     0 0 NO_DOOR
+                call ladder_lr 40 100 WT
+                body KEY_DEFAULTS pos={+- @FW (100+WT)*4} id=1
+                frame 40 0 @FW-40 @FH
+                    call place_alternating_stomping_obstacles @FW 200 0 30 0
+                endframe
+            endframe
+
+            frame @FW @FH-200 @FW+800 @FH
+                body BACKGROUND_DEFAULTS pos={-- 0 0} shape={rect @FW @FH} texture=SPRITES_DIR+"futuristic_wall_darker.png"
+                call begin_room WT      0 0 NO_WALL     0 50 0      0 0 NO_DOOR     0 0 NO_DOOR
+                    body KEY_DEFAULTS pos={-- 0 0} id=0
+                    frame @FW/4 0 @FW*3/4 @FH
+                        call place_moving_crewmate 3
+                    endframe
+                endframe
+                frame @FW 0 @FW+300 @FH
+                    body BACKGROUND_DEFAULTS pos={-- 0 0} shape={rect @FW @FH} texture=SPRITES_DIR+"futuristic_wall_darker.png"
+                    call begin_room WT      0 0 NO_WALL     0 0 NO_DOOR     0 0 NO_DOOR     0 0 NO_DOOR
+                        body VENT_DEFAULTS pos={+- @FW 0}
+                    endframe
+                endframe
+            endframe
+        endframe
+    endframe
+endframe

@@ -1,0 +1,33 @@
+body shape={rect,--,0.0,0.0,20,980.0} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,0.0,980.0,20,20.0} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,+-,1040.0,0.0,20,980.0} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,+-,1040.0,980.0,20,20.0} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,0.0,0.0,1020.0,20} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,1020.0,0.0,20.0,20} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,-+,0.0,1000.0,1020.0,20} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,-+,1020.0,1000.0,20.0,20} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+scene_boundary 20.000000 20.000000 1020.000000 980.000000
+body shape={rect,--,20.0,20.0,1000.0,960.0} role=decoration texture_render_option=2 texture=resources/sprites/space.png
+body shape={rect,--,20.0,20.0,30,30} role=player texture=resources/sprites/imposter_extra_sus.png mass=10 health=10 tongue_damage=1 invincibility_time=0.5
+body shape={star,==,245.0,95.0,8,20,10} trajectory_shape={star,==,245.0,95.0,5,50.0,25.0} role=damaging_obstacle damage=1 trajectory_speed=50 texture=resources/sprites/spikey_circle.png
+body shape={rect,=-,300.0,20.0,20,20} role=key id=0
+body shape={rect,--,620.0,20.0,20,0} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,620.0,20.0,20,45} role=door id=0
+body shape={rect,--,620.0,65.0,20,195.0} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,+-,720.0,20.0,20,0} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,+-,720.0,20.0,20,45} role=door id=1
+body shape={rect,+-,720.0,65.0,20,195.0} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,-+,620.0,260.0,80.0,20} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,-+,700.0,260.0,20.0,20} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,=-,670.0,20.0,20,20} role=key id=1
+body shape={rect,=-,945.0,20.0,90,40} role=trampoline texture=resources/sprites/black_hole_trampoline.png bounciness=5
+body shape={rect,+-,900.0,20.0,5,20.0} role=wall texture=resources/sprites/transparent.png texture_render_option=2
+body shape={rect,--,990.0,20.0,5,20.0} role=wall texture=resources/sprites/transparent.png texture_render_option=2
+body shape={rect,--,870.0,740.0,150.0,240.0} role=decoration texture_render_option=2 texture=resources/sprites/futuristic_wall_darker.png
+body shape={rect,--,870.0,740.0,20,240.0} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,870.0,980.0,20,0.0} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,+-,1020.0,740.0,20,240.0} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,+-,1020.0,980.0,20,0.0} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,870.0,740.0,130.0,20} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,1000.0,740.0,20.0,20} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,=+,945.0,740.0,50,15} role=vent texture=resources/sprites/vent.png

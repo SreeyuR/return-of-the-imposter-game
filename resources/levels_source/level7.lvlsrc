@@ -1,0 +1,65 @@
+# Wall thickness
+let WT 20
+
+frame 0 0 1600 500
+    scene_boundary 0 0 @FW @FH
+    call begin_room WT      0 0 NO_DOOR     0 0 NO_DOOR     0 0 NO_DOOR     0 0 NO_DOOR
+        body BACKGROUND_DEFAULTS pos={-- 0 0} shape={rect @FW @FH} texture=SPRITES_DIR+"futuristic_wall_darker.png"
+        
+        # bottom left room
+        frame 0 0 1000 @FH/2
+            call begin_room WT      0 0 NO_WALL     0 50 0     0 0 NO_WALL     50 50 1
+                body PLAYER_DEFAULTS pos={-- 0 0}
+
+                # platform step to vent box
+                body WALL_DEFAULTS pos={+= @FW/6 @FH/4} shape={rect 60 WT}
+
+                # contains blue key and vent
+                frame @FW/6 0 @FW/3 @FH
+                    body KEY_DEFAULTS pos={=+ @FW/2 @FH} id=0
+                    frame 0 0 @FW @FH/2
+                        call begin_room WT      0 0 NO_DOOR     0 0 NO_DOOR     0 0 NO_WALL     0 @FW-(2*WT) 3
+                            body VENT_DEFAULTS pos={=- @FW/2 0}
+                        endframe
+                    endframe
+                endframe
+
+                frame 500 0 @FW-50 @FH
+                    call place_alternating_stomping_obstacles 30 @FH-100 100 100 1
+                endframe
+            endframe
+        endframe
+
+        # top left room
+        frame 0 @FH/2 1000 @FH
+            call begin_room WT      0 0 NO_WALL     0 -80 2     0 0 NO_WALL     0 0 NO_WALL
+                # platform in middle
+                frame @FW/4 @FH/2 @FW @FH
+                    call begin_room WT      0 0 NO_WALL     0 0 NO_WALL     0 0 NO_DOOR     0 0 NO_WALL
+                        body KEY_DEFAULTS pos={=- @FW/2 0} id=1
+                        frame 0 0 @FW/2 @FH
+                            call place_moving_crewmate 1
+                        endframe
+                    endframe
+                endframe
+                frame @FW/3 0 2*@FW/3 @FH/2
+                    call place_moving_crewmate 2
+                endframe
+            endframe
+            # red key
+            body KEY_DEFAULTS pos={=- @FW/2 0} id=3
+        endframe
+
+        # right room
+        frame 1000 0 1600 @FH
+            # yellow key
+            body KEY_DEFAULTS pos={=+ @FW/2 @FH-50} id=2
+            frame 0 0 @FW 3*@FH/4
+                func ladder_callback
+                    body SPIKE_DEFAULTS pos={=- @FW/2 0} shape={rect @FW/4 SPIKE_HEIGHT}
+                endfunc
+                call ladder_with_callback @FW/2 60 WT 0 ladder_callback
+            endframe
+        endframe
+    endframe
+endframe

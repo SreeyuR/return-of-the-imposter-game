@@ -1,0 +1,7 @@
+scene_boundary 0.000000 0.000000 5000.000000 500.000000
+body shape={rect,--,0.0,0.0,5000.0,500.0} role=decoration texture_render_option=2 texture=resources/sprites/futuristic_wall_darker.png
+body shape={rect,+=,0.0,250.0,300,1100.0} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,-=,5000.0,250.0,300,1100.0} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,=+,2500.0,0.0,5600.0,300} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,=-,2500.0,500.0,5600.0,300} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,500.0,0.0,30,30} role=player texture=resources/sprites/imposter_extra_sus.png mass=10 health=10 tongue_damage=1 invincibility_time=0.5

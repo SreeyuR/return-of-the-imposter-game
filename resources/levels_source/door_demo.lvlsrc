@@ -1,0 +1,41 @@
+# Wall thickness
+let WT 10
+
+func door_tower cur_id
+    if @FH >= DOOR_HEIGHT + WT and cur_id >= 0
+        body WALL_DEFAULTS pos={-- 0 DOOR_HEIGHT} shape={rect @FW WT}
+        body DOOR_DEFAULTS pos={-- 0 0} id=cur_id
+        frame 0 DOOR_HEIGHT+WT @FW @FH
+            call door_tower cur_id-1
+        endframe
+    endif
+endfunc
+
+func key_tower cur_id height
+    if @FH >= KEY_HEIGHT + WT and cur_id >= 0
+        body WALL_DEFAULTS pos={-- 0 height} shape={rect @FW WT}
+        body KEY_DEFAULTS pos={-- 0 0} id=cur_id
+        frame 0 height+WT @FW @FH
+            call key_tower cur_id-1
+        endframe
+    endif
+endfunc
+
+frame 0 0 WINDOW_WIDTH WINDOW_HEIGHT
+
+    scene_boundary -100 0 @FW+100 @FH
+    
+    body role=decoration pos={-- 0 0} shape={rect @FW @FH} texture=SPRITES_DIR+"space_background_3.jpg"
+
+    # Boundary walls
+    call frameboundary_ext 300
+    body PLAYER_DEFAULTS pos={-- 500 0}
+
+    frame 0 0 300 @FH
+        call key_tower 4 40
+    endframe
+    frame @FW-300 0 @FW @FH
+        call door_tower 4
+    endframe
+
+endframe

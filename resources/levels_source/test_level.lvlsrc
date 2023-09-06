@@ -1,0 +1,11 @@
+frame 0 0 5000 WINDOW_HEIGHT
+
+    scene_boundary 0 0 @FW @FH
+
+    body BACKGROUND_DEFAULTS pos={-- 0 0} shape={rect @FW @FH} texture=SPRITES_DIR+"futuristic_wall_darker.png"
+
+    # Boundary walls
+    call frameboundary_ext 300
+    body PLAYER_DEFAULTS pos={-- 500 0}
+
+endframe

@@ -1,0 +1,40 @@
+# Wall thickness
+let WT 10
+
+frame 0 0 WINDOW_WIDTH WINDOW_HEIGHT
+
+    scene_boundary 0 0 @FW @FH
+
+    body role=decoration pos={-- 0 0} shape={rect @FW @FH} texture=SPRITES_DIR+"space_background_3.jpg"
+
+    # Boundary walls
+    call frameboundary_ext 300
+
+    frame @FW-200 0 @FW @FH-200
+        body WALL_DEFAULTS pos={-- 0 0} shape={rect WT @FH}
+        body WALL_DEFAULTS pos={=- 0 @FH} shape={rect 100 WT}
+        body WALL_DEFAULTS pos={+= @FW @FH-100} shape={rect @FW/2 WT}
+        frame WT 0 @FW @FH
+            call place_spikes
+        endframe
+    endframe
+
+    frame @FW/3 0 @FW-200 @FH/2
+        frame 0 0 @FW*4/5 @FH
+            body WALL_DEFAULTS pos={-- 0 0} shape={rect @FW @FH}
+            frame 0 @FH @FW @FH
+                call place_moving_crewmate 1
+            endframe
+        endframe
+        frame @FW*4/5 0 @FW @FH
+            call ladder_lr @FW/3 40 WT
+            call place_vent
+        endframe
+    endframe
+
+    frame 0 0 @FW/3 @FH/2
+        body PLAYER_DEFAULTS pos={-- 0 0}
+        call ladder_lr @FW/3 50 WT
+    endframe
+
+endframe

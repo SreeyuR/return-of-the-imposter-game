@@ -1,0 +1,67 @@
+# Wall thickness
+let WT 20
+
+frame 0 0 1500 750
+    scene_boundary 0 0 @FW @FH
+    # Boundaries
+    call begin_room WT      0 0 NO_DOOR     0 0 NO_DOOR     0 0 NO_DOOR     0 0 NO_DOOR
+        body BACKGROUND_DEFAULTS pos={-- 0 0} shape={rect @FW @FH} texture=SPRITES_DIR+"futuristic_wall_darker.png"
+
+        # First floor
+        frame 0 0 @FW @FH/2
+            # Starting room. 2 floors high
+            # Has trampoline that launches player upward, spikes on the right side
+            frame 0 0 @FW/4 @FH*2
+                call begin_room WT      0 0 NO_WALL     0 DOOR_HEIGHT 0     0 0 NO_WALL     0 0 NO_WALL
+                    body WALL_DEFAULTS pos={-+ 0 60} shape={rect 50 WT}
+                    body PLAYER_DEFAULTS pos={-- 0 60}
+                    body WALL_DEFAULTS pos={++ @FW @FH/2} shape={rect CREWMATE_WIDTH WT}
+                    body CREWMATE_DEFAULTS pos={+- @FW @FH/2} facing_left=1
+                    frame @FW/2-50 0 @FW/2+50 @FH
+                        call place_trampoline
+                        body KEY_DEFAULTS pos={=+ @FW/2 @FH} id=0
+                    endframe
+                    frame @FW/2+50 0 @FW-30 @FH
+                        call place_spikes
+                    endframe
+                endframe
+            endframe
+
+            # Room 2. Crewmate walking in the bottom, key in top right
+            # with ladder steps leading to it.
+            frame @FW/4 0 @FW/2 @FH
+                call begin_room WT      0 0 NO_WALL     0 DOOR_HEIGHT 3       0 0 NO_WALL       0 0 NO_DOOR
+                    frame 0 0 @FW/2 @FH*2/3
+                        call ladder_rl @FW/4 30 WT
+                    endframe
+                    frame @FW/2 0 @FW @FH
+                        call place_moving_crewmate 1
+                        body WALL_DEFAULTS pos={-- 0 @FH*2/3} shape={rect @FW WT}
+                    endframe
+                    body KEY_DEFAULTS pos={++ @FW @FH} id=3
+                endframe
+            endframe
+
+            # Room 3. Has alternating stomping obstacles
+            frame @FW/2 0 @FW @FH
+                call begin_room WT      0 0 NO_WALL     0 0 NO_WALL     0 0 NO_WALL     @FW-WT-DOOR_HEIGHT DOOR_HEIGHT 1
+                    frame 50 0 @FW-50 @FH
+                        call place_alternating_stomping_obstacles 30 @FH-100 100 100 1
+                    endframe
+                    frame @FW-200 0 @FW @FH-40
+                        body KEY_DEFAULTS pos={-- 0 0} id=1
+                        call ladder_lr @FW/4 20 WT
+                    endframe
+                endframe
+            endframe
+        endframe
+
+        # Second floor
+        frame @FW/4 @FH/2 @FW @FH
+            body VENT_DEFAULTS pos={-- 0 0}
+            frame @FW/2 0 3*@FW/4 @FH
+                call place_moving_crewmate 1
+            endframe
+        endframe
+    endframe
+endframe

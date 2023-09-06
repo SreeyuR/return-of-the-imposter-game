@@ -1,0 +1,10 @@
+body shape={rect,--,0.0,0.0,1000.0,800.0} role=decoration texture_render_option=2 texture=resources/sprites/space.png
+body shape={rect,--,0.0,0.0,20,780.0} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,0.0,780.0,20,20.0} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,+-,1250.0,0.0,20,780.0} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,+-,1250.0,780.0,20,20.0} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,0.0,0.0,1230.0,20} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,1230.0,0.0,20.0,20} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,-+,0.0,800.0,1230.0,20} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,-+,1230.0,800.0,20.0,20} role=wall texture=resources/sprites/concrete_texture.jpg texture_render_option=2
+body shape={rect,--,423.3333333333333,20.0,706.6666666666667,20} trajectory_shape={rect,=-,776.6666666666667,30.0,0.001,640.0} role=damaging_obstacle mass=20 texture=resources/sprites/concrete_texture.jpg texture_render_option=2 damage=0 'balloon_elevator.png'=resources/sprites/balloon_elevator.png trajectory_speed=20
