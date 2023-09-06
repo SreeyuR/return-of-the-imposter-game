@@ -2,7 +2,7 @@
 
 ## Description
 
-Welcome to "Return of the Imposter," a thrilling platform game set in the [Among Us](https://amongusplay.online/) Among Us universe. As an imposter on a spaceship, your mission is to navigate through various levels, overcome obstacles, and outwit the crewmates who are determined to thwart your plans. Your ultimate goal is to reach the reactor and destroy the ship. But beware, the crewmates become increasingly vicious as you progress.
+Welcome to "Return of the Imposter," a thrilling platform game set in the [Among Us](https://amongusplay.online/) universe. As an imposter on a spaceship, your mission is to navigate through various levels, overcome obstacles, and outwit the crewmates who are determined to thwart your plans. Your ultimate goal is to reach the reactor and destroy the ship. But beware, the crewmates become increasingly vicious as you progress.
 
 ![Game Title Screen](game_screenshots/game_title_screen.png)
 
