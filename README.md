@@ -1,7 +1,7 @@
 # Return of the Imposter (Game)
 Platform game built using a custom-designed physics engine. The objective is to complete all levels using arrow keys, tongue feature, and jumping to sabotage the ship. Inspired by the popular video games among us and Mario bros.
 
-![Game Screenshot]()
+![Game Title Screen](https://github.com/SreeyuR/return-of-the-imposter-game/tree/a4531f0a173e63b403c0f83702e28ffeb1988773/game_screenshots)
 
 ## Description
 
