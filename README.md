@@ -22,6 +22,7 @@ Welcome to "Return of the Imposter," a thrilling platform game set in the [Among
    - Move with WASD keys.
    - Control the imposter's tongue direction by clicking anywhere on the screen.
    - P to pause and go to the main menu.
+   - R to restart the level.
 
 ## Installation
 
@@ -35,7 +36,7 @@ Welcome to "Return of the Imposter," a thrilling platform game set in the [Among
    
 ## Credits
 
-This game was created by [Sreeyutha Ratala], [Misha Mints], [Sophia Stiles], and [Annika Viswesh].
+This game was created by [Sreeyutha Ratala](https://github.com/SreeyuR), Misha Mints, Sophia Stiles, and Annika Viswesh.
 
 ## License
 
